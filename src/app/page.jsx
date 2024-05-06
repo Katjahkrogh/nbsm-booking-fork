@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Wrapper from "../components/Wrapper";
+
 
 export default function Home() {
+  
   return (
-    <>
-    <h1>NAILS BY SASCHA MELINA</h1>
-    </>
+    <Wrapper />
   );
 }
