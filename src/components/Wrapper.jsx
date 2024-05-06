@@ -1,8 +1,13 @@
 import React from 'react'
+import Startpage from './Startpage'
+import LogInd from './logInd'
 
 function Wrapper() {
   return (
-    <div>Wrapper</div>
+    <div>
+      <Startpage />
+      <LogInd />
+    </div>
   )
 }
 
