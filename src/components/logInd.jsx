@@ -6,10 +6,19 @@ import StepText from './StepText';
 function LogInd() {
   return (
     <div className="flex flex-col items-center">
-      <StepText
-        header={"Log ind på din boookingprofil"}
+      <StepText header={"Log ind på din boookingprofil"} />
+      <Input
+        type={"text"}
+        htmlFor={"navn"}
+        name={"navn"}
+        placeholder={"Fornavn"}
       />
-      <Input type={"text"} htmlFor={"navn"} name={"navn"} placeholder={"Fornavn"}/>
+      <Input
+        type={"text"}
+        htmlFor={"kode"}
+        name={"kode"}
+        placeholder={"Adgangskode"}
+      />
       <PrimaryBtn text={"Log ind"} />
     </div>
   );

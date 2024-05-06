@@ -10,7 +10,7 @@ const montserrat = Montserrat({
 function PrimaryBtn({text}) {
   return (
     <div
-      className={`w-96 md:w-[500px] my-8 py-4 uppercase grid place-content-center text-green border-green border hover:bg-lightGreen hover:border-lightGreen hover:text-bg rounded-xl cursor-pointer ${montserrat.className}`}
+      className={`w-full md:w-[500px] my-8 py-4 uppercase grid place-content-center text-green border-green border hover:bg-lightGreen hover:border-lightGreen hover:text-bg rounded-xl cursor-pointer ${montserrat.className}`}
     >
       {text}
     </div>
