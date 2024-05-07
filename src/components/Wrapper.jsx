@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Startpage from './Startpage';
 import LogInd from './logInd';
 import OpretBruger from './OpretBruger';
+import Calender from './Calender';
 
 function Wrapper() {
   const [booking, setBooking] = useState([]);
@@ -41,6 +42,7 @@ function Wrapper() {
       <Startpage />
       <LogInd />
       <OpretBruger />
+      <Calender/>
     </div>
   );
 }
