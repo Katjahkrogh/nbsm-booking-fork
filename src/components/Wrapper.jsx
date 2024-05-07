@@ -27,22 +27,10 @@ function Wrapper() {
   }, []);
   return (
     <div className="px-10">
-      <div>
-        <ul>
-          {booking.map((book) => (
-            <li key={book.id}>{book.day}</li>
-          ))}
-        </ul>
-        <ul>
-          {booking.map((book) => (
-            <li key={book.id}>{book.time}</li>
-          ))}
-        </ul>
-      </div>
       <Startpage />
       <LogInd />
       <OpretBruger />
-      <Calender/>
+      <Calender />
     </div>
   );
 }
