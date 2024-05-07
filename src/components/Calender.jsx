@@ -27,30 +27,23 @@ export default function Example() {
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
   let [meetings, setMeetings] = useState([]);
 
-  useEffect(() => {
-    const fetchMeetings = async () => {
-      try {
-        const response = await fetch(
-          "https://nckxtdsipzwbtkcrrjbe.supabase.co/rest/v1/Tider?select=*",
-          {
-            headers: {
-              apikey:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ",
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error("Fejl ved hentning af data");
-        }
-        const data = await response.json();
-        setMeetings(data);
-      } catch (error) {
-        console.error("Fejl ved hentning af møder:", error);
-      }
-    };
+ useEffect(() => {
+   const fetchMeetings = async () => {
+     const url = `https://nckxtdsipzwbtkcrrjbe.supabase.co/rest/v1/Tider?select=*`;
+     const options = {
+       method: "GET",
+       headers: {
+         apikey:
+           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ",
+       },
+     };
+     const res = await fetch(url, options);
+     const data = await res.json();
+     setMeetings(data);
+   };
 
-    fetchMeetings();
-  }, []);
+   fetchMeetings();
+ }, []);
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
@@ -99,12 +92,12 @@ let selectedDayMeetings = meetings.filter((meeting) =>
               </button>
             </div>
             <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
-              <div>S</div>
               <div>M</div>
               <div>T</div>
-              <div>W</div>
+              <div>O</div>
               <div>T</div>
               <div>F</div>
+              <div>L</div>        
               <div>S</div>
             </div>
             <div className="grid grid-cols-7 mt-2 text-sm">
@@ -123,7 +116,7 @@ let selectedDayMeetings = meetings.filter((meeting) =>
                       isEqual(day, selectedDay) && "text-white",
                       !isEqual(day, selectedDay) &&
                         isToday(day) &&
-                        "text-red-500",
+                        "text-pink-500",
                       !isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         isSameMonth(day, firstDayCurrentMonth) &&
@@ -132,10 +125,10 @@ let selectedDayMeetings = meetings.filter((meeting) =>
                         !isToday(day) &&
                         !isSameMonth(day, firstDayCurrentMonth) &&
                         "text-gray-400",
-                      isEqual(day, selectedDay) && isToday(day) && "bg-red-500",
                       isEqual(day, selectedDay) &&
-                        !isToday(day) &&
-                        "bg-gray-900",
+                        isToday(day) &&
+                        "bg-pink-500",
+                      isEqual(day, selectedDay) && !isToday(day) && "bg-green",
                       !isEqual(day, selectedDay) && "hover:bg-gray-200",
                       (isEqual(day, selectedDay) || isToday(day)) &&
                         "font-semibold",
@@ -150,8 +143,14 @@ let selectedDayMeetings = meetings.filter((meeting) =>
                   <div className="w-1 h-1 mx-auto mt-1">
                     {meetings.some((meeting) =>
                       isSameDay(
-                        parse(meeting.startDatetime, "yyyy-MM-dd'T'HH:mm:ss", new Date()), day)
-                       ) && (
+                        parse(
+                          meeting.startDatetime,
+                          "yyyy-MM-dd'T'HH:mm:ss",
+                          new Date()
+                        ),
+                        day
+                      )
+                    ) && (
                       <div className="w-1 h-1 rounded-full bg-sky-500"></div>
                     )}
                   </div>
@@ -161,9 +160,9 @@ let selectedDayMeetings = meetings.filter((meeting) =>
           </div>
           <section className="mt-12 md:mt-0 md:pl-14">
             <h2 className="font-semibold text-gray-900">
-              Schedule for{" "}
+              Ledige tider
               <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
-                {format(selectedDay, "MMM dd, yyy")}
+                {format(selectedDay, " dd. MMM")}
               </time>
             </h2>
             <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
@@ -172,7 +171,7 @@ let selectedDayMeetings = meetings.filter((meeting) =>
                   <Meeting meeting={meeting} key={meeting.id} />
                 ))
               ) : (
-                <p>No meetings for today.</p>
+                <p>Ingen ledige tider</p>
               )}
             </ol>
           </section>
@@ -187,71 +186,14 @@ function Meeting({ meeting }) {
 
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-gray-100 hover:bg-gray-100">
-      <img
-        src={meeting.imageUrl}
-        alt=""
-        className="flex-none w-10 h-10 rounded-full"
-      />
       <div className="flex-auto">
         <p className="text-gray-900">{meeting.name}</p>
         <p className="mt-0.5">
           <time dateTime={startDateTime.toISOString()}>
-            {format(startDateTime, "h:mm a")}
+            {format(startDateTime, "hh:mm")}
           </time>
         </p>
       </div>
-      <Menu
-        as="div"
-        className="relative opacity-0 focus-within:opacity-100 group-hover:opacity-100"
-      >
-        <div>
-          <Menu.Button className="-m-2 flex items-center rounded-full p-1.5 text-gray-500 hover:text-gray-600">
-            <span className="sr-only">Open options</span>
-            <DotsVerticalIcon className="w-6 h-6" aria-hidden="true" />
-          </Menu.Button>
-        </div>
-
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="absolute right-0 z-10 mt-2 origin-top-right bg-white rounded-md shadow-lg w-36 ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <a
-                    href="#"
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
-                    )}
-                  >
-                    Edit
-                  </a>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <a
-                    href="#"
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
-                    )}
-                  >
-                    Cancel
-                  </a>
-                )}
-              </Menu.Item>
-            </div>
-          </Menu.Items>
-        </Transition>
-      </Menu>
     </li>
   );
 }
