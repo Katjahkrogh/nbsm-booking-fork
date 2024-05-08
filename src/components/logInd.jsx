@@ -5,8 +5,10 @@ import StepText from './StepText';
 
 function LogInd() {
   return (
-    <div className="flex flex-col items-center">
-      <StepText header={"Log ind på din boookingprofil"} />
+   
+
+    <div className="flex flex-col md:items-center">    
+    <StepText header={"Log ind"} />
       <Input
         type={"text"}
         htmlFor={"navn"}
@@ -21,6 +23,7 @@ function LogInd() {
       />
       <PrimaryBtn text={"Log ind"} />
     </div>
+
   );
 }
 

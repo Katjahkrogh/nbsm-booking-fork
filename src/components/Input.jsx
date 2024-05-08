@@ -9,7 +9,7 @@ export default function Input({type, name, htmlFor, placeholder }) {
         placeholder={placeholder}
         required
         minLength="2"
-        className="w-full md:w-[500px] my-4 py-5 px-5 bg-bg border placeholder-lightGreen border-[#C9BBA9] rounded-lg "
+        className="w-full md:w-[500px] my-4 py-4 px-5 bg-bg border placeholder-lightGreen border-[#f0eae2] rounded-xl "
       />
     </legend>
   );

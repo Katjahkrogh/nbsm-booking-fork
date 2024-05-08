@@ -4,6 +4,7 @@ import Startpage from './Startpage';
 import LogInd from './logInd';
 import OpretBruger from './OpretBruger';
 import Calender from './Calender';
+import Behandling from './Behandling';
 
 function Wrapper() {
   return (
@@ -11,6 +12,7 @@ function Wrapper() {
       <Startpage />
       <LogInd />
       <OpretBruger />
+      <Behandling />
       <Calender />
     </div>
   );

@@ -5,35 +5,35 @@ import StepText from "./StepText";
 
 function OpretBruger() {
   return (
-    <div className="flex flex-col items-center">
+      <div className="flex flex-col md:items-center">  
       <StepText header={"Opret en ny profil"} />
-      <Input
-        type={"text"}
-        htmlFor={"navn"}
-        name={"navn"}
-        placeholder={"Fornavn"}
-      />
-     
-      <Input
-        type={"email"}
-        htmlFor={"email"}
-        name={"email"}
-        placeholder={"Email"}
-      />
-      <Input
-        type={"date"}
-        htmlFor={"føs"}
-        name={"føs"}
-        placeholder={"Fødselsdag"}
-      /> 
-      <Input
-        type={"text"}
-        htmlFor={"kode"}
-        name={"kode"}
-        placeholder={"Adgangskode"}
-      />
-      <PrimaryBtn text={"Opret bruger"} />
-    </div>
+        <Input
+          type={"text"}
+          htmlFor={"navn"}
+          name={"navn"}
+          placeholder={"Fornavn"}
+        />
+
+        <Input
+          type={"email"}
+          htmlFor={"email"}
+          name={"email"}
+          placeholder={"Email"}
+        />
+        <Input
+          type={"date"}
+          htmlFor={"føs"}
+          name={"føs"}
+          placeholder={"Fødselsdag"}
+        />
+        <Input
+          type={"text"}
+          htmlFor={"kode"}
+          name={"kode"}
+          placeholder={"Adgangskode"}
+        />
+        <PrimaryBtn text={"Opret bruger"} />
+      </div>
   );
 }
 
