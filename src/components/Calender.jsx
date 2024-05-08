@@ -35,15 +35,15 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Example({onTimeSelect}) {
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
-  let [meetings, setMeetings] = useState([]);
+  let [times, setTimes] = useState([]);
 
   useEffect(() => {
-    const fetchMeetings = async () => {
+    const fetchTimes = async () => {
       const url = `https://nckxtdsipzwbtkcrrjbe.supabase.co/rest/v1/Tider?select=*`;
       const options = {
         method: "GET",
@@ -54,10 +54,10 @@ export default function Example() {
       };
       const res = await fetch(url, options);
       const data = await res.json();
-      setMeetings(data);
+      setTimes(data);
     };
 
-    fetchMeetings();
+    fetchTimes();
   }, []);
 
   let days = eachDayOfInterval({
@@ -75,9 +75,17 @@ export default function Example() {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
-  let selectedDayMeetings = meetings.filter((meeting) =>
-    isSameDay(parse(meeting.day, "yyyy-MM-dd", new Date()), selectedDay)
+  let selectedDayTimes = times.filter((time) =>
+    isSameDay(parse(time.day, "yyyy-MM-dd", new Date()), selectedDay)
   );
+
+   function handleTimeClick(day, time) {
+     // Kalder funktionen modtaget som prop og sender data tilbage
+     onTimeSelect(day, time);
+   }
+
+
+
 
   return (
     <div className={`py-16 ${openSans.className}`}>
@@ -137,7 +145,9 @@ export default function Example() {
                       !isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         isSameMonth(day, firstDayCurrentMonth) &&
-                        (isBefore(day, today) ? "text-lightGreen" : "text-green"),
+                        (isBefore(day, today)
+                          ? "text-lightGreen"
+                          : "text-green"),
                       !isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         !isSameMonth(day, firstDayCurrentMonth) &&
@@ -157,11 +167,8 @@ export default function Example() {
                     </time>
                   </button>
                   <div className="w-1 h-1 mx-auto mt-1">
-                    {meetings.some((meeting) =>
-                      isSameDay(
-                        parse(meeting.day, "yyyy-MM-dd", new Date()),
-                        day
-                      )
+                    {times.some((time) =>
+                      isSameDay(parse(time.day, "yyyy-MM-dd", new Date()), day)
                     ) && (
                       <div className="w-1 h-1 rounded-full bg-pink-500"></div>
                     )}
@@ -181,9 +188,13 @@ export default function Example() {
               </time>
             </h2>
             <ol className="mt-10 space-y-4 text-sm font leading-6 text-green">
-              {selectedDayMeetings.length > 0 ? (
-                selectedDayMeetings.map((meeting) => (
-                  <Meeting meeting={meeting} key={meeting.id} />
+              {selectedDayTimes.length > 0 ? (
+                selectedDayTimes.map((time) => (
+                  <Times
+                    time={time}
+                    key={time.id}
+                    handleTimeClick={handleTimeClick}
+                  />
                 ))
               ) : (
                 <p>Ingen ledige tider</p>
@@ -196,33 +207,29 @@ export default function Example() {
   );
 }
 
-function Meeting({ meeting }) {
-  let startDateTime = new Date(`${meeting.day}T${meeting.time}`);
+function Times({ time, handleTimeClick }) {
+  let startDateTime = new Date(`${time.day}T${time.time}`);
   let formattedDateTime = format(startDateTime, "HH:mm", {
     timeZone: "Europe/Copenhagen",
   });
 
-
   return (
-   
-      <div className="w-full md:w-32 rounded-xl bg-lightBeige">
-        <input
-          type="radio"
-          name="option"
-          id={meeting.id}
-          value={formattedDateTime}
-          className="peer hidden"
-        />
-        <label
-          htmlFor={meeting.id}
-          className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-green peer-checked:font-semibold peer-checked:text-white peer-hover:bg-beige peer-checked:hover:bg-green"
-        >
-          <time dateTime={startDateTime.toISOString()}>
-            {formattedDateTime}
-          </time>
-        </label>
-      </div>
-     
+    <div className="w-full md:w-32 rounded-xl bg-lightBeige">
+      <input
+        type="radio"
+        name="times"
+        id={time.id}
+        value={formattedDateTime}
+        className="peer hidden"
+        onClick={() => handleTimeClick(time.day, time.time)}
+      />
+      <label
+        htmlFor={time.id}
+        className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-green peer-checked:font-semibold peer-checked:text-white peer-hover:bg-beige peer-checked:hover:bg-green"
+      >
+        <time dateTime={startDateTime.toISOString()}>{formattedDateTime}</time>
+      </label>
+    </div>
   );
 }
 

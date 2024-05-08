@@ -1,14 +1,15 @@
 import React from "react";
 
-function Radio({ behandling, id }) {
+function Radio({ behandling, id, onTreatmentSelect }) {
   return (
     <div className="w-full md:w-[500px] rounded-xl bg-lightBeige">
       <input
         type="radio"
-        name="option"
-        id={ id }
-        value={behandling }
+        name="behandling"
+        id={id}
+        value={behandling}
         className="peer hidden"
+        onChange={(e) => onTreatmentSelect(e.target.value)}
       />
       <label
         htmlFor={id}

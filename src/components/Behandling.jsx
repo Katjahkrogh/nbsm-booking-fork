@@ -9,8 +9,7 @@ const openSans = Open_Sans({
   display: "swap",
 });
 
-
-function Behandling() {
+function Behandling({ onTreatmentSelect }) {
   return (
     <div className=" flex flex-col md:items-center">
       <StepText
@@ -20,11 +19,31 @@ function Behandling() {
       <ol
         className={`space-y-4 text-sm font leading-6 text-lgreen ${openSans.className}`}
       >
-        <Radio behandling={"Nyt sæt Forlængelse gele / akrylgele"} id={1} />
-        <Radio behandling={"Opfyldning gele / akrylgele"} id={2} />
-        <Radio behandling={"Nyt sæt gelpolish"} id={3} />
-        <Radio behandling={"Opfyldning gelpolish"} id={4} />
-        <Radio behandling={"Aftagning"} id={5} />
+        <Radio
+          onTreatmentSelect={onTreatmentSelect}
+          behandling={"Nyt sæt Forlængelse gele / akrylgele"}
+          id={"nytsæt1"}
+        />
+        <Radio
+          onTreatmentSelect={onTreatmentSelect}
+          behandling={"Opfyldning gele / akrylgele"}
+          id={"opfyld1"}
+        />
+        <Radio
+          onTreatmentSelect={onTreatmentSelect}
+          behandling={"Nyt sæt gelpolish"}
+          id={"nytsæt2"}
+        />
+        <Radio
+          onTreatmentSelect={onTreatmentSelect}
+          behandling={"Opfyldning gelpolish"}
+          id={"opfyld2"}
+        />
+        <Radio
+          onTreatmentSelect={onTreatmentSelect}
+          behandling={"Aftagning"}
+          id={"aftag"}
+        />
       </ol>
     </div>
   );
