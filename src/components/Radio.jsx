@@ -13,7 +13,7 @@ function Radio({ behandling, id, onTreatmentSelect }) {
       />
       <label
         htmlFor={id}
-        className="block cursor-pointer select-none rounded-xl py-4 pl-4 peer-checked:bg-green peer-checked:font-semibold peer-checked:text-white peer-hover:bg-beige peer-checked:hover:bg-green"
+        className="block cursor-pointer select-none rounded-xl py-4 pl-4 peer-checked:bg-green peer-checked:font-semibold peer-checked:text-white peer-hover:bg-beige peer-checked:hover:bg-green transition-all duration-200	"
       >
         {behandling}
       </label>

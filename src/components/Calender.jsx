@@ -35,7 +35,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example({onTimeSelect}) {
+export default function Calender({onTimeSelect}) {
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -159,7 +159,7 @@ export default function Example({onTimeSelect}) {
                       !isEqual(day, selectedDay) && "hover:bg-beige",
                       (isEqual(day, selectedDay) || isToday(day)) &&
                         "font-semibold",
-                      "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
+                      "mx-auto flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200"
                     )}
                   >
                     <time dateTime={format(day, "yyyy-MM-dd")}>
@@ -225,7 +225,7 @@ function Times({ time, handleTimeClick }) {
       />
       <label
         htmlFor={time.id}
-        className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-green peer-checked:font-semibold peer-checked:text-white peer-hover:bg-beige peer-checked:hover:bg-green"
+        className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-green peer-checked:font-semibold peer-checked:text-white peer-hover:bg-beige peer-checked:hover:bg-green transition-all duration-200"
       >
         <time dateTime={startDateTime.toISOString()}>{formattedDateTime}</time>
       </label>

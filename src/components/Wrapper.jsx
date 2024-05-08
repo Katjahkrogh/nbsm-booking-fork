@@ -5,6 +5,7 @@ import LogInd from './logInd';
 import OpretBruger from './OpretBruger';
 import Calender from './Calender';
 import Behandling from './Behandling';
+import Overview from './Overview';
 
 function Wrapper() {
   const [selectedBooking, setSelectedBooking] = useState(null);
@@ -15,8 +16,8 @@ function Wrapper() {
     setSelectedBooking({ day, time });
   }
 
-  function handleTreatmentSelect(treatment) {
-    setSelectedTreatment({ treatment });
+  function handleTreatmentSelect(selectedTreatment) {
+    setSelectedTreatment( selectedTreatment );
   }
 
   useEffect(() => {
@@ -34,6 +35,10 @@ function Wrapper() {
       <OpretBruger />
       <Behandling onTreatmentSelect={handleTreatmentSelect} />
       <Calender onTimeSelect={handleTimeSelect} />
+      <Overview
+        selectedBooking={selectedBooking}
+        selectedTreatment={selectedTreatment}
+      />
     </div>
   );
 }
