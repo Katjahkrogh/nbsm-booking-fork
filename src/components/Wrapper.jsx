@@ -7,13 +7,6 @@ import Calender from './Calender';
 import Behandling from './Behandling';
 import Overview from './Overview';
 import { isSameDay, parse, startOfToday } from 'date-fns';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
 
 function Wrapper() {
   const [selectedBooking, setSelectedBooking] = useState(null);
