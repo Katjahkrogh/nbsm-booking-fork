@@ -2,13 +2,6 @@ import React from 'react';
 import StepText from './StepText';
 import PrimaryBtn from './PrimaryBtn';
 import Link from 'next/link';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
 
 function Overview({ selectedBooking, selectedTreatment, setStep }) {
   return (

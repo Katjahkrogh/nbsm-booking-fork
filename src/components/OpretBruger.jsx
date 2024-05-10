@@ -2,13 +2,6 @@ import React from 'react';
 import PrimaryBtn from './PrimaryBtn';
 import Input from './Input';
 import StepText from './StepText';
-import { Montserrat } from 'next/font/google';
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
 
 function OpretBruger({ setStep, onNameChange }) {
   const handleChange = (e) => {
