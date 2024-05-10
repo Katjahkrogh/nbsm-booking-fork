@@ -13,6 +13,7 @@ function Wrapper() {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [selectedTreatment, setSelectedTreatment] = useState(null);
   const [step, setStep] = useState(0);
+  const [userName, setUserName] = useState('');
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [times, setTimes] = useState([]);
@@ -112,13 +113,13 @@ function Wrapper() {
       <form onSubmit={submit} id="bookingForm">
         {/* <Startpage />
         <LogInd /> */}
-        <div className={`flex flex-col m-10 sm:px-10 ${step === 0 ? '' : 'hidden'}`}>
-          <OpretBruger setStep={setStep} />
+        <div className={`${step === 0 ? '' : 'hidden'}`}>
+          <OpretBruger setStep={setStep} onNameChange={setUserName} />
         </div>
-        <div className={`flex flex-col m-10 sm:px-10 ${step === 1 ? '' : 'hidden'}`}>
+        <div className={`${step === 1 ? '' : 'hidden'}`}>
           <Behandling onTreatmentSelect={handleTreatmentSelect} setStep={setStep} />
         </div>
-        <div className={`flex flex-col m-10 sm:px-10 ${step === 2 ? '' : 'hidden'}`}>
+        <div className={`${step === 2 ? '' : 'hidden'}`}>
           <Calender
             onTimeSelect={handleTimeSelect}
             times={times}
@@ -128,11 +129,19 @@ function Wrapper() {
             setStep={setStep}
           />
         </div>
-        <div className={`flex flex-col m-10 sm:px-10 ${step === 3 ? '' : 'hidden'}`}>
-          <Overview setStep={setStep} selectedBooking={selectedBooking} selectedTreatment={selectedTreatment} />
+        <div className={`${step === 3 ? '' : 'hidden'}`}>
+          <Overview
+            setStep={setStep}
+            selectedBooking={selectedBooking}
+            selectedTreatment={selectedTreatment}
+          />
         </div>
-        <div className={`flex flex-col m-10 sm:px-10 ${step === 4 ? '' : 'hidden'}`}>
-          <FinalOverview selectedBooking={selectedBooking} selectedTreatment={selectedTreatment} />
+        <div className={`${step === 4 ? '' : 'hidden'}`}>
+          <FinalOverview
+            selectedBooking={selectedBooking}
+            selectedTreatment={selectedTreatment}
+            userName={userName}
+          />
         </div>
       </form>
     </div>
