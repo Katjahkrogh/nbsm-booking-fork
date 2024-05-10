@@ -22,7 +22,8 @@ function Wrapper() {
       const options = {
         method: 'GET',
         headers: {
-          apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ',
+          apikey:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ',
         },
       };
       const res = await fetch(url, options);
@@ -54,7 +55,11 @@ function Wrapper() {
     evt.preventDefault();
 
     // Find den tid, som brugeren har valgt på den valgte dag
-    const selectedTimeData = times.find((time) => isSameDay(parse(time.day, 'yyyy-MM-dd', new Date()), selectedDay) && time.time === selectedBooking.time);
+    const selectedTimeData = times.find(
+      (time) =>
+        isSameDay(parse(time.day, 'yyyy-MM-dd', new Date()), selectedDay) &&
+        time.time === selectedBooking.time
+    );
 
     // Hvis tiden blev fundet, opdater reservationen
     if (selectedTimeData) {
@@ -78,18 +83,22 @@ function Wrapper() {
 
       // Opret fetch-headeren
       let supabaseHeader = {
-        apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ',
+        apikey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ',
         Accept: 'application/json',
         Prefer: 'return=representation',
         'Content-Type': 'application/json',
       };
 
       // Send PATCH-anmodning til Supabase REST API for at opdatere reservationen
-      let supabaseResponse = await fetch(`https://nckxtdsipzwbtkcrrjbe.supabase.co/rest/v1/Tider?id=eq.${selectedTimeData.id}`, {
-        method: 'PATCH',
-        body: updatedReservationJSON,
-        headers: supabaseHeader,
-      });
+      let supabaseResponse = await fetch(
+        `https://nckxtdsipzwbtkcrrjbe.supabase.co/rest/v1/Tider?id=eq.${selectedTimeData.id}`,
+        {
+          method: 'PATCH',
+          body: updatedReservationJSON,
+          headers: supabaseHeader,
+        }
+      );
 
       // Log opdaterede data til konsollen
       let supabaseData = await supabaseResponse.json();
@@ -109,7 +118,14 @@ function Wrapper() {
           <Behandling onTreatmentSelect={handleTreatmentSelect} setStep={setStep} />
         </div>
         <div className={`flex flex-col m-10 sm:px-10 ${step === 2 ? '' : 'hidden'}`}>
-          <Calender onTimeSelect={handleTimeSelect} times={times} selectedDay={selectedDay} setSelectedDay={setSelectedDay} today={today} setStep={setStep} />
+          <Calender
+            onTimeSelect={handleTimeSelect}
+            times={times}
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay}
+            today={today}
+            setStep={setStep}
+          />
         </div>
         <div className={`flex flex-col m-10 sm:px-10 ${step === 3 ? '' : 'hidden'}`}>
           <Overview selectedBooking={selectedBooking} selectedTreatment={selectedTreatment} />
