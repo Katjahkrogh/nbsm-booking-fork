@@ -7,6 +7,7 @@ import Calender from './Calender';
 import Behandling from './Behandling';
 import Overview from './Overview';
 import { isSameDay, parse, startOfToday } from 'date-fns';
+import FinalOverview from './FinalOverview';
 
 function Wrapper() {
   const [selectedBooking, setSelectedBooking] = useState(null);
@@ -129,6 +130,9 @@ function Wrapper() {
         </div>
         <div className={`flex flex-col m-10 sm:px-10 ${step === 3 ? '' : 'hidden'}`}>
           <Overview selectedBooking={selectedBooking} selectedTreatment={selectedTreatment} />
+        </div>
+        <div className={`flex flex-col m-10 sm:px-10 ${step === 4 ? '' : 'hidden'}`}>
+          <FinalOverview selectedBooking={selectedBooking} selectedTreatment={selectedTreatment} />
         </div>
       </form>
     </div>
