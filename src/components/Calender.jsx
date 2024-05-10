@@ -17,6 +17,7 @@ import { da } from "date-fns/locale";
 import { useState, useEffect } from "react";
 import { Montserrat, Open_Sans } from "next/font/google";
 import StepText from "./StepText";
+import PrimaryBtn from "./PrimaryBtn";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -173,9 +174,8 @@ export default function Calender({
                 selectedDayTimes
                   .slice() // Lav en kopi af arrayet for at undgå at ændre det originale array
                   .sort((a, b) => {
-
-                     const aTime = new Date(`1970-01-01T${a.time}`);
-                     const bTime = new Date(`1970-01-01T${b.time}`);
+                    const aTime = new Date(`1970-01-01T${a.time}`);
+                    const bTime = new Date(`1970-01-01T${b.time}`);
 
                     return new Date(aTime) - new Date(bTime);
                   })
@@ -193,14 +193,7 @@ export default function Calender({
           </section>
         </div>
       </div>
-      <button
-        onClick={() => {
-          setStep((prevStep) => prevStep + 1);
-        }}
-        className={`w-full md:w-[500px] my-8 py-4 uppercase grid place-content-center text-green border-green border hover:bg-green hover:border-green hover:text-bg rounded-xl cursor-pointer transition-all duration-200 ${montserrat.className}`}
-      >
-        Bekræft booking
-      </button>
+      <PrimaryBtn setStep={setStep} text={"vælg tid"} />
     </div>
   );
 }

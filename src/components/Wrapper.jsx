@@ -129,7 +129,7 @@ function Wrapper() {
           />
         </div>
         <div className={`flex flex-col m-10 sm:px-10 ${step === 3 ? '' : 'hidden'}`}>
-          <Overview selectedBooking={selectedBooking} selectedTreatment={selectedTreatment} />
+          <Overview setStep={setStep} selectedBooking={selectedBooking} selectedTreatment={selectedTreatment} />
         </div>
         <div className={`flex flex-col m-10 sm:px-10 ${step === 4 ? '' : 'hidden'}`}>
           <FinalOverview selectedBooking={selectedBooking} selectedTreatment={selectedTreatment} />

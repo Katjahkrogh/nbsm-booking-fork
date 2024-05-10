@@ -39,14 +39,7 @@ function OpretBruger({ setStep }) {
         name={"kode"}
         placeholder={"Adgangskode"}
       />
-      <button
-        onClick={() => {
-          setStep((prevStep) => prevStep + 1);
-        }}
-        className={`w-full md:w-[500px] my-8 py-4 uppercase grid place-content-center text-green border-green border hover:bg-green hover:border-green hover:text-bg rounded-xl cursor-pointer transition-all duration-200 ${montserrat.className}`}
-      >
-        Bekræft booking
-      </button>
+      <PrimaryBtn setStep={setStep} text={"Opret bruger"}/>
     </div>
   );
 }

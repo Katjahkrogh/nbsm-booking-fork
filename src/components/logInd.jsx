@@ -21,7 +21,7 @@ function LogInd() {
         name={"kode"}
         placeholder={"Adgangskode"}
       />
-      <PrimaryBtn text={"Log ind"} />
+      {/* <PrimaryBtn text={"Log ind"} /> */}
     </div>
 
   );
