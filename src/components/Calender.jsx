@@ -20,29 +20,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Calender({ onTimeSelect }) {
-  let today = startOfToday();
-  let [selectedDay, setSelectedDay] = useState(today);
+export default function Calender({ onTimeSelect, times, selectedDay, setSelectedDay, today, setStep }) {
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
   let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date());
-  let [times, setTimes] = useState([]);
-
-  useEffect(() => {
-    const fetchTimes = async () => {
-      const url = `https://nckxtdsipzwbtkcrrjbe.supabase.co/rest/v1/Tider?select=*`;
-      const options = {
-        method: 'GET',
-        headers: {
-          apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ',
-        },
-      };
-      const res = await fetch(url, options);
-      const data = await res.json();
-      setTimes(data);
-    };
-
-    fetchTimes();
-  }, []);
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
@@ -114,6 +94,13 @@ export default function Calender({ onTimeSelect }) {
           </section>
         </div>
       </div>
+      <button
+        onClick={() => {
+          setStep((prevStep) => prevStep + 1);
+        }}
+        className={`w-full md:w-[500px] my-8 py-4 uppercase grid place-content-center text-green border-green border hover:bg-green hover:border-green hover:text-bg rounded-xl cursor-pointer transition-all duration-200 ${montserrat.className}`}>
+        Bekræft booking
+      </button>
     </div>
   );
 }
@@ -125,12 +112,14 @@ function Times({ time, handleTimeClick }) {
   });
 
   return (
-    <div className="w-full md:w-32 rounded-xl bg-lightBeige">
-      <input type="radio" name="times" id={time.id} value={formattedDateTime} className="peer hidden" onClick={() => handleTimeClick(time.day, time.time)} />
-      <label htmlFor={time.id} className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-green peer-checked:font-semibold peer-checked:text-white peer-hover:bg-beige peer-checked:hover:bg-green transition-all duration-200">
-        <time dateTime={startDateTime.toISOString()}>{formattedDateTime}</time>
-      </label>
-    </div>
+    <>
+      <div className="w-full md:w-32 rounded-xl bg-lightBeige">
+        <input type="radio" name="times" id={time.id} value={formattedDateTime} className="peer hidden" onClick={() => handleTimeClick(time.day, time.time)} />
+        <label htmlFor={time.id} className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-green peer-checked:font-semibold peer-checked:text-white peer-hover:bg-beige peer-checked:hover:bg-green transition-all duration-200">
+          <time dateTime={startDateTime.toISOString()}>{formattedDateTime}</time>
+        </label>
+      </div>
+    </>
   );
 }
 

@@ -1,10 +1,10 @@
-import Image from "next/image";
-import Wrapper from "../components/Wrapper";
-
+import Image from 'next/image';
+import Wrapper from '../components/Wrapper';
 
 export default function Home() {
-  
   return (
-    <Wrapper />
+    <main>
+      <Wrapper />
+    </main>
   );
 }
