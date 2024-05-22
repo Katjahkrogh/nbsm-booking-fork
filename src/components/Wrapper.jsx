@@ -1,19 +1,22 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import Startpage from './Startpage';
-import LogInd from './logInd';
-import OpretBruger from './OpretBruger';
-import Calender from './Calender';
-import Behandling from './Behandling';
-import Overview from './Overview';
-import { isSameDay, parse, startOfToday } from 'date-fns';
-import FinalOverview from './FinalOverview';
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import Startpage from "./Startpage";
+import LogInd from "./logInd";
+import OpretBruger from "./OpretBruger";
+import Calender from "./Calender";
+import Behandling from "./Behandling";
+import Overview from "./Overview";
+import { isSameDay, parse, startOfToday } from "date-fns";
+import FinalOverview from "./FinalOverview";
+import emailjs from "@emailjs/browser";
 
 function Wrapper() {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [selectedTreatment, setSelectedTreatment] = useState(null);
   const [step, setStep] = useState(0);
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState("");
+  const [userEmail, setuserEmail] = useState("");
+  const formRef = useRef();
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [times, setTimes] = useState([]);
@@ -22,10 +25,10 @@ function Wrapper() {
     const fetchTimes = async () => {
       const url = `https://nckxtdsipzwbtkcrrjbe.supabase.co/rest/v1/Tider?select=*`;
       const options = {
-        method: 'GET',
+        method: "GET",
         headers: {
           apikey:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ',
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ",
         },
       };
       const res = await fetch(url, options);
@@ -59,7 +62,7 @@ function Wrapper() {
     // Find den tid, som brugeren har valgt på den valgte dag
     const selectedTimeData = times.find(
       (time) =>
-        isSameDay(parse(time.day, 'yyyy-MM-dd', new Date()), selectedDay) &&
+        isSameDay(parse(time.day, "yyyy-MM-dd", new Date()), selectedDay) &&
         time.time === selectedBooking.time
     );
 
@@ -70,8 +73,8 @@ function Wrapper() {
 
       // Opdater reservationen med de nye oplysninger, herunder navn og email
       const formData = new FormData(evt.target);
-      const navn = formData.get('navn');
-      const email = formData.get('email');
+      const navn = formData.get("navn");
+      const email = formData.get("email");
 
       const reservationData = {
         navn: navn,
@@ -86,17 +89,17 @@ function Wrapper() {
       // Opret fetch-headeren
       let supabaseHeader = {
         apikey:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ',
-        Accept: 'application/json',
-        Prefer: 'return=representation',
-        'Content-Type': 'application/json',
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ",
+        Accept: "application/json",
+        Prefer: "return=representation",
+        "Content-Type": "application/json",
       };
 
       // Send PATCH-anmodning til Supabase REST API for at opdatere reservationen
       let supabaseResponse = await fetch(
         `https://nckxtdsipzwbtkcrrjbe.supabase.co/rest/v1/Tider?id=eq.${selectedTimeData.id}`,
         {
-          method: 'PATCH',
+          method: "PATCH",
           body: updatedReservationJSON,
           headers: supabaseHeader,
         }
@@ -105,38 +108,87 @@ function Wrapper() {
       // Log opdaterede data til konsollen
       let supabaseData = await supabaseResponse.json();
       console.log(supabaseData);
+
+      // Send email via EmailJS
+      emailjs
+        .sendForm(
+          "service_4ur605f",
+          "template_9oqz2lt",
+          formRef.current,
+          "2lzphIXp9Q4fi2F_X"
+        )
+        .then(
+          () => {
+            console.log("SUCCESS!");
+            formRef.current.reset();
+          },
+          (error) => {
+            console.log("FAILED...", error.text);
+          }
+        );
     }
   }
 
   return (
     <div className="px-10">
-      <form onSubmit={submit} id="bookingForm">
+      <form ref={formRef} onSubmit={submit} id="bookingForm">
         {/* <Startpage />
         <LogInd /> */}
-        <div className={`${step === 0 ? '' : 'hidden'}`}>
-          <OpretBruger setStep={setStep} onNameChange={setUserName} />
+
+        <div className={`${step === 0 ? "" : "hidden"}`}>
+          <Behandling
+            onTreatmentSelect={handleTreatmentSelect}
+            selectedTreatment={selectedTreatment}
+            setStep={setStep}
+          />
         </div>
-        <div className={`${step === 1 ? '' : 'hidden'}`}>
-          <Behandling onTreatmentSelect={handleTreatmentSelect} setStep={setStep} />
-        </div>
-        <div className={`${step === 2 ? '' : 'hidden'}`}>
+        <div className={`${step === 1 ? "" : "hidden"}`}>
           <Calender
             onTimeSelect={handleTimeSelect}
             times={times}
+            selectedBooking={selectedBooking}
             selectedDay={selectedDay}
             setSelectedDay={setSelectedDay}
             today={today}
             setStep={setStep}
           />
         </div>
-        <div className={`${step === 3 ? '' : 'hidden'}`}>
+        <div className={`${step === 2 ? "" : "hidden"}`}>
+          <OpretBruger
+            setStep={setStep}
+            onNameChange={setUserName}
+            onEmailChange={setuserEmail}
+          />
+        </div>
+        <div className={`${step === 3 ? "" : "hidden"}`}>
           <Overview
             setStep={setStep}
             selectedBooking={selectedBooking}
             selectedTreatment={selectedTreatment}
+            userName={userName}
+            userEmail={userEmail}
           />
         </div>
-        <div className={`${step === 4 ? '' : 'hidden'}`}>
+        {selectedBooking && (
+          <>
+            <input
+              type="hidden"
+              name="booking_behandling"
+              value={selectedTreatment}
+            />
+            <input
+              type="hidden"
+              name="booking_date"
+              value={selectedBooking.day}
+            />
+            <input
+              type="hidden"
+              name="booking_time"
+              value={selectedBooking.time}
+            />
+          </>
+        )}
+        <div className={`${step === 4 ? "" : "hidden"}`}>
           <FinalOverview
             selectedBooking={selectedBooking}
             selectedTreatment={selectedTreatment}

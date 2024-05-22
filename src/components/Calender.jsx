@@ -36,6 +36,7 @@ export default function Calender({
   setSelectedDay,
   today,
   setStep,
+  selectedBooking,
 }) {
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
   let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date());
@@ -65,103 +66,128 @@ export default function Calender({
   }
 
   return (
-    <div className="py-16">
-      <div className="max-w-md  mx-auto sm:px-7 md:max-w-4xl md:px-6">
-        <StepText header={'Vælg dag og tid'} />
-        <div className="md:grid md:grid-cols-2 md:divide-x md:divide-beige">
-          <div className="md:pr-14">
-            <div className="flex items-center">
-              <h2 className={`flex-auto text-green capitalize ${montserrat.className}`}>
-                {format(firstDayCurrentMonth, 'MMMM yyyy', { locale: da })}
-              </h2>
-              <button
-                type="button"
-                onClick={previousMonth}
-                className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-lightGreen hover:text-green">
-                <span className="sr-only">Previous month</span>
-                <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" />
-              </button>
-              <button
-                onClick={nextMonth}
-                type="button"
-                className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-lightGreen hover:text-green">
-                <span className="sr-only">Next month</span>
-                <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
-              </button>
-            </div>
-            <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-lightGreen">
-              <div>M</div>
-              <div>T</div>
-              <div>O</div>
-              <div>T</div>
-              <div>F</div>
-              <div>L</div>
-              <div>S</div>
-            </div>
-            <div className="grid grid-cols-7 mt-2 text-sm">
-              {days.map((day, dayIdx) => (
-                <div
-                  key={day.toString()}
-                  className={classNames(dayIdx === 0 && colStartClasses[getDay(day)], 'py-1.5')}>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedDay(day)}
-                    className={classNames(
-                      isEqual(day, selectedDay) && 'text-white',
-                      !isEqual(day, selectedDay) && isToday(day) && 'text-pink-500',
-                      !isEqual(day, selectedDay) &&
-                        !isToday(day) &&
-                        isSameMonth(day, firstDayCurrentMonth) &&
-                        (isBefore(day, today) ? 'text-lightGreen' : 'text-green'),
-                      !isEqual(day, selectedDay) &&
-                        !isToday(day) &&
-                        !isSameMonth(day, firstDayCurrentMonth) &&
-                        'text-gray-400',
-                      isEqual(day, selectedDay) && isToday(day) && 'bg-pink-500',
-                      isEqual(day, selectedDay) && !isToday(day) && 'bg-green',
-                      !isEqual(day, selectedDay) && 'hover:bg-beige',
-                      (isEqual(day, selectedDay) || isToday(day)) && 'font-semibold',
-                      'mx-auto flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200'
-                    )}>
-                    <time dateTime={format(day, 'yyyy-MM-dd')}>{format(day, 'd')}</time>
-                  </button>
-                  <div className="w-1 h-1 mx-auto mt-1">
-                    {times.some((time) =>
-                      isSameDay(parse(time.day, 'yyyy-MM-dd', new Date()), day)
-                    ) && <div className="w-1 h-1 rounded-full bg-pink-500"></div>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <section className="mt-12 md:mt-0 md:pl-14">
-            <h2 className={`font-semibold text-green ${montserrat.className}`}>
-              Ledige tider d.
-              <time className="capitalize" dateTime={format(selectedDay, 'yyyy-MM-dd')}>
-                {format(selectedDay, ' dd. MMMM', { locale: da })}
-              </time>
+    <div className="max-w-md  mx-auto sm:px-7 md:max-w-4xl md:px-6">
+      <StepText header={"Vælg dag og tid"} />
+      <div className="md:grid md:grid-cols-2 md:divide-x md:divide-beige">
+        <div className="md:pr-14">
+          <div className="flex items-center">
+            <h2
+              className={`flex-auto text-green capitalize ${montserrat.className}`}
+            >
+              {format(firstDayCurrentMonth, "MMMM yyyy", { locale: da })}
             </h2>
-            <ol className="mt-10 space-y-4 text-sm font leading-6 text-green">
-              {selectedDayTimes.length > 0 ? (
-                selectedDayTimes
-                  .slice() // Lav en kopi af arrayet for at undgå at ændre det originale array
-                  .sort((a, b) => {
-                    const aTime = new Date(`1970-01-01T${a.time}`);
-                    const bTime = new Date(`1970-01-01T${b.time}`);
-
-                    return new Date(aTime) - new Date(bTime);
-                  })
-                  .map((time) => (
-                    <Times time={time} key={time.id} handleTimeClick={handleTimeClick} />
-                  ))
-              ) : (
-                <p>Ingen ledige tider</p>
-              )}
-            </ol>
-          </section>
+            <button
+              type="button"
+              onClick={previousMonth}
+              className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-lightGreen hover:text-green"
+            >
+              <span className="sr-only">Previous month</span>
+              <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" />
+            </button>
+            <button
+              onClick={nextMonth}
+              type="button"
+              className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-lightGreen hover:text-green"
+            >
+              <span className="sr-only">Next month</span>
+              <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-lightGreen">
+            <div>M</div>
+            <div>T</div>
+            <div>O</div>
+            <div>T</div>
+            <div>F</div>
+            <div>L</div>
+            <div>S</div>
+          </div>
+          <div className="grid grid-cols-7 mt-2 text-sm">
+            {days.map((day, dayIdx) => (
+              <div
+                key={day.toString()}
+                className={classNames(
+                  dayIdx === 0 && colStartClasses[getDay(day)],
+                  "py-1.5"
+                )}
+              >
+                <button
+                  type="button"
+                  onClick={() => setSelectedDay(day)}
+                  className={classNames(
+                    isEqual(day, selectedDay) && "text-white",
+                    !isEqual(day, selectedDay) &&
+                      isToday(day) &&
+                      "text-pink-500",
+                    !isEqual(day, selectedDay) &&
+                      !isToday(day) &&
+                      isSameMonth(day, firstDayCurrentMonth) &&
+                      (isBefore(day, today) ? "text-lightGreen" : "text-green"),
+                    !isEqual(day, selectedDay) &&
+                      !isToday(day) &&
+                      !isSameMonth(day, firstDayCurrentMonth) &&
+                      "text-gray-400",
+                    isEqual(day, selectedDay) && isToday(day) && "bg-pink-500",
+                    isEqual(day, selectedDay) && !isToday(day) && "bg-green",
+                    !isEqual(day, selectedDay) && "hover:bg-beige",
+                    (isEqual(day, selectedDay) || isToday(day)) &&
+                      "font-semibold",
+                    "mx-auto flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200"
+                  )}
+                >
+                  <time dateTime={format(day, "yyyy-MM-dd")}>
+                    {format(day, "d")}
+                  </time>
+                </button>
+                <div className="w-1 h-1 mx-auto mt-1">
+                  {times.some((time) =>
+                    isSameDay(parse(time.day, "yyyy-MM-dd", new Date()), day)
+                  ) && <div className="w-1 h-1 rounded-full bg-pink-500"></div>}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+        <section className="mt-12 md:mt-0 md:pl-14">
+          <h2 className={`font-semibold text-green ${montserrat.className}`}>
+            Ledige tider d.
+            <time
+              className="capitalize"
+              dateTime={format(selectedDay, "yyyy-MM-dd")}
+            >
+              {format(selectedDay, " dd. MMMM", { locale: da })}
+            </time>
+          </h2>
+          <ol className="mt-10 space-y-4 text-sm font leading-6 text-green">
+            {selectedDayTimes.length > 0 ? (
+              selectedDayTimes
+                .slice() // Lav en kopi af arrayet for at undgå at ændre det originale array
+                .sort((a, b) => {
+                  const aTime = new Date(`1970-01-01T${a.time}`);
+                  const bTime = new Date(`1970-01-01T${b.time}`);
+
+                  return new Date(aTime) - new Date(bTime);
+                })
+                .map((time) => (
+                  <Times
+                    time={time}
+                    key={time.id}
+                    handleTimeClick={handleTimeClick}
+                  />
+                ))
+            ) : (
+              <p>Ingen ledige tider</p>
+            )}
+          </ol>
+        </section>
+      </div>{" "}
+      <div
+        className={`${
+          selectedBooking === null ? "hidden" : ""
+        } flex justify-center`}
+      >
+        <PrimaryBtn setStep={setStep} text={"vælg tid"} />
       </div>
-      <PrimaryBtn setStep={setStep} text={'vælg tid'} />
     </div>
   );
 }

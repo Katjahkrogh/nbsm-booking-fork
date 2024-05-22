@@ -3,7 +3,7 @@ import StepText from './StepText';
 import PrimaryBtn from './PrimaryBtn';
 import Link from 'next/link';
 
-function Overview({ selectedBooking, selectedTreatment, setStep }) {
+function Overview({ selectedBooking, selectedTreatment, setStep, userName, userEmail }) {
   return (
     <div className="flex flex-col md:items-center mb-20 text-green ">
       <StepText
@@ -13,7 +13,6 @@ function Overview({ selectedBooking, selectedTreatment, setStep }) {
 
       {selectedBooking && (
         <div className="mb-10">
-          {' '}
           <h3 className="my-4 text-xl">DIN TID</h3>
           <div className="bg-lightBeige w-full md:w-[500px] rounded-xl py-6 px-6 flex flex-col gap-4">
             <p className="text-lg">{selectedTreatment}</p>
@@ -56,7 +55,7 @@ function Overview({ selectedBooking, selectedTreatment, setStep }) {
           Jeg har læst og accepterer bookings og afbudspolitikken
         </label>
       </div>
-      <PrimaryBtn setStep={setStep} text={'Bekræft booking'} type={'submit'} id={'bookingForm'} />
+      <PrimaryBtn setStep={setStep} text={'Bekræft din booking'} type={'submit'} id={'bookingForm'} />
     </div>
   );
 }

@@ -15,7 +15,7 @@ function PrimaryBtn({text, setStep, type, id}) {
       }}
       type={type}
       id={id}
-      className={`w-full md:w-[500px] my-8 py-4 uppercase grid place-content-center text-green border-green border hover:bg-green hover:border-green hover:text-bg rounded-xl cursor-pointer transition-all  ${montserrat.className}`}
+      className={`w-full md:w-[500px] my-10 py-4 uppercase grid place-content-center text-green border-green border hover:bg-green hover:border-green hover:text-bg rounded-xl cursor-pointer transition-all  ${montserrat.className}`}
     >
       {text}
     </button>
