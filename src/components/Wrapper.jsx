@@ -37,6 +37,11 @@ function Wrapper() {
     };
 
     fetchTimes();
+
+    //Henter data hvert 5. minut
+    const interval = setInterval(fetchData, 5 * 60 * 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   function handleTimeSelect(day, time) {
