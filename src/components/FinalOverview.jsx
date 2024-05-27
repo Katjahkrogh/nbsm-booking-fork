@@ -1,7 +1,5 @@
 import React from 'react';
 import StepText from './StepText';
-import { format } from 'date-fns';
-import { da } from 'date-fns/locale';
 
 function FinalOverview({ selectedBooking, selectedTreatment, userName, userEmail }) {
   return (
@@ -22,7 +20,7 @@ function FinalOverview({ selectedBooking, selectedTreatment, userName, userEmail
           </div>
         </div>
       )}
-      <p className="text-lightGreen text-xs">
+      <p className="text-lightGreen text-xs ">
         Du vil modtage en booking bekræftelse på din mail: {userEmail}
       </p>
     </section>
