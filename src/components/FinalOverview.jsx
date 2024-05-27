@@ -1,7 +1,7 @@
 import React from 'react';
 import StepText from './StepText';
 
-function FinalOverview({ selectedBooking, selectedTreatment, userName }) {
+function FinalOverview({ selectedBooking, selectedTreatment, userName, userEmail }) {
   return (
     <section className="flex flex-col md:items-center">
       <div className="w-full md:w-[500px]">
@@ -20,6 +20,9 @@ function FinalOverview({ selectedBooking, selectedTreatment, userName }) {
           </div>
         </div>
       )}
+      <p className="text-lightGreen text-xs">
+        Du vil modtage en booking bekræftelse på din mail: {userEmail}
+      </p>
     </section>
   );
 }

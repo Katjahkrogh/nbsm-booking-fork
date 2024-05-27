@@ -176,6 +176,7 @@ function Wrapper() {
             selectedBooking={selectedBooking}
             selectedTreatment={selectedTreatment}
             userName={userName}
+            userEmail={userEmail}
           />
         </div>
       </form>
