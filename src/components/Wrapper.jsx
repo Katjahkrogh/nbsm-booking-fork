@@ -130,18 +130,22 @@ function Wrapper() {
 
   return (
     <div className="px-10">
-      <div className={`${step != 4 ? '' : 'hidden'} flex justify-center items-center`}>
+      <div
+        className={`${
+          step != 4 ? "" : "hidden"
+        } flex justify-center items-center`}
+      >
         <ProgressBar step={step} />
       </div>
       <form ref={formRef} onSubmit={submit} id="bookingForm">
-        <div className={`${step === 0 ? '' : 'hidden'}`}>
+        <div className={`${step === 0 ? "" : "hidden"}`}>
           <Behandling
             onTreatmentSelect={handleTreatmentSelect}
             selectedTreatment={selectedTreatment}
             setStep={setStep}
           />
         </div>
-        <div className={`${step === 1 ? '' : 'hidden'}`}>
+        <div className={`${step === 1 ? "" : "hidden"}`}>
           <Calender
             onTimeSelect={handleTimeSelect}
             times={times}
@@ -152,30 +156,45 @@ function Wrapper() {
             setStep={setStep}
           />
         </div>
-        <div className={`${step === 2 ? '' : 'hidden'}`}>
-          <OpretBruger setStep={setStep} onNameChange={setUserName} onEmailChange={setuserEmail} />
+        <div className={`${step === 2 ? "" : "hidden"}`}>
+          <OpretBruger
+            setStep={setStep}
+            onNameChange={setUserName}
+            onEmailChange={setuserEmail}
+          />
         </div>
-        <div className={`${step === 3 ? '' : 'hidden'}`}>
+        <div className={`${step === 3 ? "" : "hidden"}`}>
           <Overview
             setStep={setStep}
             selectedBooking={selectedBooking}
             selectedTreatment={selectedTreatment}
-            userName={userName}
-            userEmail={userEmail}
           />
         </div>
         {selectedBooking && (
           <>
-            <input type="hidden" name="booking_behandling" value={selectedTreatment} />
-            <input type="hidden" name="booking_date" value={selectedBooking.day} />
-            <input type="hidden" name="booking_time" value={selectedBooking.time} />
+            <input
+              type="hidden"
+              name="booking_behandling"
+              value={selectedTreatment}
+            />
+            <input
+              type="hidden"
+              name="booking_date"
+              value={selectedBooking.day}
+            />
+            <input
+              type="hidden"
+              name="booking_time"
+              value={selectedBooking.time}
+            />
           </>
         )}
-        <div className={`${step === 4 ? '' : 'hidden'}`}>
+        <div className={`${step === 4 ? "" : "hidden"}`}>
           <FinalOverview
             selectedBooking={selectedBooking}
             selectedTreatment={selectedTreatment}
             userName={userName}
+            userEmail={userEmail}
           />
         </div>
       </form>

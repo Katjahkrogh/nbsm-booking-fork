@@ -3,7 +3,7 @@ import StepText from './StepText';
 import PrimaryBtn from './PrimaryBtn';
 import Link from 'next/link';
 
-function Overview({ selectedBooking, selectedTreatment, setStep, userName, userEmail }) {
+function Overview({ selectedBooking, selectedTreatment, setStep}) {
   return (
     <div className="flex flex-col md:items-center mb-20 text-green ">
       <StepText
