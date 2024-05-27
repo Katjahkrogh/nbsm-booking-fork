@@ -130,7 +130,7 @@ function Wrapper() {
 
   return (
     <div className="px-10">
-      <div className={`${step != 4 ? '' : 'hidden'} flex justify-center items-center`}>
+      <div className={`${step != 4 ? '' : 'hidden'}`}>
         <ProgressBar step={step} />
       </div>
       <form ref={formRef} onSubmit={submit} id="bookingForm">
