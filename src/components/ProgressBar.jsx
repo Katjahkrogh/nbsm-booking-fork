@@ -14,7 +14,7 @@ const items = [
   },
 ];
 const ProgressBar = ({ step }) => (
-  <div className="md:w-[600px] items-center text-center">
+  <div className="md:w-[585px] items-center text-center">
     <ConfigProvider
       theme={{
         token: {
