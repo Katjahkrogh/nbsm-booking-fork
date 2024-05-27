@@ -38,8 +38,8 @@ function Wrapper() {
 
     fetchTimes();
 
-    //Henter data hvert 5. minut
-    const interval = setInterval(fetchTimes, 5 * 60 * 1000);
+    //Henter data hvert minut
+    const interval = setInterval(fetchTimes, 1 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, []);
