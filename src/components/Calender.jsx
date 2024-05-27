@@ -150,12 +150,7 @@ export default function Calender({
                   return new Date(aTime) - new Date(bTime);
                 })
                 .map((time) => (
-                  <Times
-                    time={time}
-                    key={time.id}
-                    handleTimeClick={handleTimeClick}
-                    formattedDay={format(selectedDay, 'dd. MMMM', { locale: da })}
-                  />
+                  <Times time={time} key={time.id} handleTimeClick={handleTimeClick} />
                 ))
             ) : (
               <p>Ingen ledige tider</p>
@@ -170,7 +165,7 @@ export default function Calender({
   );
 }
 
-function Times({ time, handleTimeClick, formattedDay }) {
+function Times({ time, handleTimeClick }) {
   let startDateTime = new Date(`${time.day}T${time.time}`);
   let formattedDateTime = format(startDateTime, 'HH:mm', {
     timeZone: 'Europe/Copenhagen',
@@ -185,7 +180,7 @@ function Times({ time, handleTimeClick, formattedDay }) {
           id={time.id}
           value={formattedDateTime}
           className="peer hidden"
-          onClick={() => handleTimeClick(formattedDay, formattedDateTime)}
+          onClick={() => handleTimeClick(time.day, time.time)}
         />
         <label
           htmlFor={time.id}
