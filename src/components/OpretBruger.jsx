@@ -23,7 +23,7 @@ function OpretBruger({ setStep, onNameChange, onEmailChange }) {
     if (name === "navn") {
       onNameChange(value);
       setNavn(value);
-      isValid = value.trim().length > 2;
+      isValid = value.trim().length > 0;
       setIsNameValid(isValid);
     } else if (name === "email") {
       onEmailChange(value);
@@ -63,7 +63,7 @@ function OpretBruger({ setStep, onNameChange, onEmailChange }) {
         htmlFor={"navn"}
         name={"navn"}
         placeholder={"Fornavn"}
-        minLength={"3"}
+        minLength={"2"}
         onChange={handleChange}
         className={
           "valid:[&:not(:placeholder-shown):not(:focus)]:bg-green-50 valid:[&:not(:placeholder-shown):not(:focus)]:border-green-500 valid:[&:not(:placeholder-shown):not(:focus)]:focus:ring-green-500 invalid:[&:not(:placeholder-shown):not(:focus)]:focus:ring-red-500 invalid:[&:not(:placeholder-shown):not(:focus)]:bg-red-50 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400"
@@ -75,7 +75,6 @@ function OpretBruger({ setStep, onNameChange, onEmailChange }) {
         name={"email"}
         placeholder={"Email"}
         onChange={handleChange}
-        minLength={"4"}
         className={
           "valid:[&:not(:placeholder-shown):not(:focus)]:bg-green-50 valid:[&:not(:placeholder-shown):not(:focus)]:border-green-500 valid:[&:not(:placeholder-shown):not(:focus)]:focus:ring-green-500 invalid:[&:not(:placeholder-shown):not(:focus)]:focus:ring-red-500 invalid:[&:not(:placeholder-shown):not(:focus)]:bg-red-50 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400"
         }
