@@ -3,7 +3,7 @@ import StepText from './StepText';
 
 function FinalOverview({ selectedBooking, selectedTreatment, userName, userEmail }) {
   return (
-    <section className="flex flex-col md:items-center">
+    <section className="flex flex-col md:items-center pt-10 md:pt-20">
       <div className="w-full md:w-[500px]">
         <StepText header={`Kære ${userName}`} />
         <h2>Jeg har modtaget din booking, og jeg glæder mig til at se dig i klinikken 💅🏼</h2>
