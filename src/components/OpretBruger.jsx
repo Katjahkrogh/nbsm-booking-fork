@@ -58,7 +58,6 @@ function OpretBruger({ setStep, onNameChange, onEmailChange }) {
         name={"føs"}
         placeholder={"Fødselsdag"}
         onChange={handleChange}
-       
       />
 
       <Input
