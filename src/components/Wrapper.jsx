@@ -54,11 +54,11 @@ function Wrapper() {
 
   useEffect(() => {
     console.log(selectedTreatment);
-  }, [selectedTreatment]); // Lytter efter ændringer i selectedTreatment
+  }, [selectedTreatment]);
 
   useEffect(() => {
     console.log(selectedBooking);
-  }, [selectedBooking]); // Lytter efter ændringer i selectedTreatment
+  }, [selectedBooking]);
 
   async function submit(evt) {
     evt.preventDefault();
@@ -87,10 +87,8 @@ function Wrapper() {
 
       updatedReservation.reservation = reservationData;
 
-      // Konverter reservationen til JSON-format
       const updatedReservationJSON = JSON.stringify(updatedReservation);
 
-      // Opret fetch-headeren
       let supabaseHeader = {
         apikey:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja3h0ZHNpcHp3YnRrY3JyamJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTY4NzgsImV4cCI6MjAzMDU3Mjg3OH0.YvIHTrtBTrOQiKB79QaqdOT5iOxpyeui20rfJ5t2CdQ',
@@ -99,7 +97,6 @@ function Wrapper() {
         'Content-Type': 'application/json',
       };
 
-      // Send PATCH-anmodning til Supabase REST API for at opdatere reservationen
       let supabaseResponse = await fetch(
         `https://nckxtdsipzwbtkcrrjbe.supabase.co/rest/v1/Tider?id=eq.${selectedTimeData.id}`,
         {
@@ -109,7 +106,6 @@ function Wrapper() {
         }
       );
 
-      // Log opdaterede data til konsollen
       let supabaseData = await supabaseResponse.json();
       console.log(supabaseData);
 
@@ -130,22 +126,18 @@ function Wrapper() {
 
   return (
     <div className="px-10">
-      <div
-        className={`${
-          step != 4 ? "" : "hidden"
-        } flex justify-center items-center`}
-      >
+      <div className={`${step != 4 ? '' : 'hidden'} flex justify-center items-center`}>
         <ProgressBar step={step} />
       </div>
       <form ref={formRef} onSubmit={submit} id="bookingForm">
-        <div className={`${step === 0 ? "" : "hidden"}`}>
+        <div className={`${step === 0 ? '' : 'hidden'}`}>
           <Behandling
             onTreatmentSelect={handleTreatmentSelect}
             selectedTreatment={selectedTreatment}
             setStep={setStep}
           />
         </div>
-        <div className={`${step === 1 ? "" : "hidden"}`}>
+        <div className={`${step === 1 ? '' : 'hidden'}`}>
           <Calender
             onTimeSelect={handleTimeSelect}
             times={times}
@@ -156,14 +148,10 @@ function Wrapper() {
             setStep={setStep}
           />
         </div>
-        <div className={`${step === 2 ? "" : "hidden"}`}>
-          <OpretBruger
-            setStep={setStep}
-            onNameChange={setUserName}
-            onEmailChange={setuserEmail}
-          />
+        <div className={`${step === 2 ? '' : 'hidden'}`}>
+          <OpretBruger setStep={setStep} onNameChange={setUserName} onEmailChange={setuserEmail} />
         </div>
-        <div className={`${step === 3 ? "" : "hidden"}`}>
+        <div className={`${step === 3 ? '' : 'hidden'}`}>
           <Overview
             setStep={setStep}
             selectedBooking={selectedBooking}
@@ -172,24 +160,12 @@ function Wrapper() {
         </div>
         {selectedBooking && (
           <>
-            <input
-              type="hidden"
-              name="booking_behandling"
-              value={selectedTreatment}
-            />
-            <input
-              type="hidden"
-              name="booking_date"
-              value={selectedBooking.day}
-            />
-            <input
-              type="hidden"
-              name="booking_time"
-              value={selectedBooking.time}
-            />
+            <input type="hidden" name="booking_behandling" value={selectedTreatment} />
+            <input type="hidden" name="booking_date" value={selectedBooking.day} />
+            <input type="hidden" name="booking_time" value={selectedBooking.time} />
           </>
         )}
-        <div className={`${step === 4 ? "" : "hidden"}`}>
+        <div className={`${step === 4 ? '' : 'hidden'}`}>
           <FinalOverview
             selectedBooking={selectedBooking}
             selectedTreatment={selectedTreatment}
