@@ -37,6 +37,7 @@ function KundeInfo({ setStep, onNameChange, onEmailChange }) {
         type={'text'}
         htmlFor={'fornavn'}
         name={'navn'}
+        label={'Fornavn'}
         placeholder={'Fornavn'}
         minLength={'2'}
         aria={'Indtast dit navn'}
@@ -50,6 +51,7 @@ function KundeInfo({ setStep, onNameChange, onEmailChange }) {
         htmlFor={'mail'}
         name={'email'}
         placeholder={'Email'}
+        label={'Email'}
         aria={'Indtast din email'}
         minLength={'2'}
         onChange={handleChange}
@@ -62,13 +64,14 @@ function KundeInfo({ setStep, onNameChange, onEmailChange }) {
         htmlFor={'fødselsdag'}
         aria={'Indtast din fødselsdag'}
         name={'føs'}
-        placeholder={'Fødselsdag'}
+        label={'Fødselsdag'}
         onChange={handleChange}
       />
 
       <Input
         type={'text'}
         htmlFor={'telefonnummer'}
+        label={'Telefon'}
         aria={'Indtast dit telefonnummer'}
         name={'telefon'}
         placeholder={'Telefon'}
