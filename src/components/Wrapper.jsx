@@ -129,7 +129,7 @@ function Wrapper() {
       <div className={`${step != 4 ? '' : 'hidden'} flex justify-center items-center`}>
         <ProgressBar step={step} />
       </div>
-      <form ref={formRef} onSubmit={submit} id="bookingForm">
+      <form ref={formRef} onSubmit={submit} id="bookingForm" aria-label="booking formular">
         <div className={`${step === 0 ? '' : 'hidden'}`}>
           <Behandling
             onTreatmentSelect={handleTreatmentSelect}
