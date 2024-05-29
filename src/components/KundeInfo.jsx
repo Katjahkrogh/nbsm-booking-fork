@@ -32,7 +32,7 @@ function KundeInfo({ setStep, onNameChange, onEmailChange }) {
       <div className="md:-ml-96">
         <BackBtn setStep={setStep} />
       </div>
-      <StepText header={'Indtast dine oplysning'} />
+      <StepText header={'Indtast dine oplysninger'} />
       <Input
         type={'text'}
         htmlFor={'fornavn'}
