@@ -1,5 +1,7 @@
 import React from 'react';
 import StepText from './StepText';
+import { format } from 'date-fns';
+import { da } from 'date-fns/locale';
 
 function FinalOverview({ selectedBooking, selectedTreatment, userName, userEmail }) {
   return (
@@ -14,7 +16,7 @@ function FinalOverview({ selectedBooking, selectedTreatment, userName, userEmail
           <div className="bg-lightBeige w-full md:w-[500px] rounded-xl py-6 px-6 flex flex-col gap-4">
             <p className="text-lg">{selectedTreatment}</p>
             <div className="flex gap-6 text-lightGreen text-sm">
-              <p>{selectedBooking.day}</p>
+              <p>{format(new Date(selectedBooking.day), ' dd. MMMM', { locale: da })}</p>
               <p>{selectedBooking.time}</p>
             </div>
           </div>
