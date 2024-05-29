@@ -35,6 +35,7 @@ function KundeInfo({ setStep, onNameChange, onEmailChange }) {
         name={'navn'}
         placeholder={'Fornavn'}
         minLength={'2'}
+        aria={'Indtast dit navn'}
         onChange={handleChange}
         className={
           'valid:[&:not(:placeholder-shown):not(:focus)]:bg-green-50 valid:[&:not(:placeholder-shown):not(:focus)]:border-green-500 valid:[&:not(:placeholder-shown):not(:focus)]:focus:ring-green-500 invalid:[&:not(:placeholder-shown):not(:focus)]:focus:ring-red-500 invalid:[&:not(:placeholder-shown):not(:focus)]:bg-red-50 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400'
@@ -45,6 +46,7 @@ function KundeInfo({ setStep, onNameChange, onEmailChange }) {
         htmlFor={'mail'}
         name={'email'}
         placeholder={'Email'}
+        aria={'Indtast din email'}
         minLength={'2'}
         onChange={handleChange}
         className={
@@ -54,6 +56,7 @@ function KundeInfo({ setStep, onNameChange, onEmailChange }) {
       <Input
         type={'date'}
         htmlFor={'fødselsdag'}
+        aria={'Indtast din fødselsdag'}
         name={'føs'}
         placeholder={'Fødselsdag'}
         onChange={handleChange}
@@ -62,6 +65,7 @@ function KundeInfo({ setStep, onNameChange, onEmailChange }) {
       <Input
         type={'text'}
         htmlFor={'telefonnummer'}
+        aria={'Indtast dit telefonnummer'}
         name={'telefon'}
         placeholder={'Telefon'}
         minLength={'2'}

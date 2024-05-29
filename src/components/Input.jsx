@@ -9,9 +9,10 @@ export default function Input({
   minLength,
   value,
   className,
+  aria,
 }) {
   return (
-    <label htmlFor={htmlFor} className="text-sm w-full  md:w-[500px] ">
+    <label aria-label={aria} htmlFor={htmlFor} className="text-sm w-full  md:w-[500px] ">
       <input
         type={type}
         name={name}
