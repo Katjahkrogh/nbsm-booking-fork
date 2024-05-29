@@ -11,7 +11,6 @@ import {
   isBefore,
   isToday,
   parse,
-  startOfToday,
 } from 'date-fns';
 import { da } from 'date-fns/locale';
 import { useState } from 'react';
