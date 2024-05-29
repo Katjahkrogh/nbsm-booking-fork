@@ -27,7 +27,7 @@ export default function Input({
         required
         value={value}
         minLength={minLength}
-        className={`w-full md:w-[500px] my-4 py-4 px-5 bg-bg border placeholder-lightGreen text-base border-[#f0eae2] rounded-xl ${className}`}
+        className={`w-full md:w-[500px] mb-4 mt-2 py-4 px-5 bg-bg border placeholder-lightGreen text-base border-[#f0eae2] rounded-xl ${className}`}
       />
     </label>
   );
