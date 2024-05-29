@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { Montserrat } from 'next/font/google';
 import StepText from './StepText';
 import PrimaryBtn from './PrimaryBtn';
+import BackBtn from './BackBtn';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -66,6 +67,7 @@ export default function Calender({
 
   return (
     <div className="max-w-md  mx-auto sm:px-7 md:max-w-4xl md:px-6">
+      <BackBtn setStep={setStep} />
       <StepText header={'Vælg dag og tid'} />
       <div className="md:grid md:grid-cols-2 md:divide-x md:divide-beige">
         <div className="md:pr-14">
@@ -133,7 +135,7 @@ export default function Calender({
             ))}
           </div>
         </div>
-        <section className="mt-12 md:mt-0 md:pl-14">
+        <section className="mt-5 md:mt-0 md:pl-14 mb-10 md:mb-0">
           <h2 className={`font-semibold text-green ${montserrat.className}`}>
             Ledige tider d.
             <time className="capitalize">{format(selectedDay, ' dd. MMMM', { locale: da })}</time>
@@ -157,7 +159,7 @@ export default function Calender({
           </ol>
         </section>
       </div>
-      <div className={`${selectedBooking === null ? 'hidden' : ''} flex justify-center`}>
+      <div className={`${selectedBooking === null ? 'hidden' : '-mt-10'} flex justify-center`}>
         <PrimaryBtn setStep={setStep} text={'vælg tid'} />
       </div>
     </div>

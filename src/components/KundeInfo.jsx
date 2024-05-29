@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import PrimaryBtn from './PrimaryBtn';
 import Input from './Input';
 import StepText from './StepText';
+import BackBtn from './BackBtn';
 
 function KundeInfo({ setStep, onNameChange, onEmailChange }) {
   const [navn, setNavn] = useState('');
@@ -28,6 +29,9 @@ function KundeInfo({ setStep, onNameChange, onEmailChange }) {
 
   return (
     <div className="flex flex-col md:items-center">
+      <div className="md:-ml-96">
+        <BackBtn setStep={setStep} />
+      </div>
       <StepText header={'Indtast dine oplysning'} />
       <Input
         type={'text'}

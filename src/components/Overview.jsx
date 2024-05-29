@@ -2,10 +2,14 @@ import React from 'react';
 import StepText from './StepText';
 import PrimaryBtn from './PrimaryBtn';
 import Link from 'next/link';
+import BackBtn from './BackBtn';
 
-function Overview({ selectedBooking, selectedTreatment, setStep}) {
+function Overview({ selectedBooking, selectedTreatment, setStep }) {
   return (
     <div className="flex flex-col md:items-center mb-20 text-green ">
+      <div className="md:-ml-96">
+        <BackBtn setStep={setStep} />
+      </div>
       <StepText
         header={'Bekræft din booking'}
         smallText={'Du modtager en mail med endelig bekræftelse'}
@@ -55,7 +59,12 @@ function Overview({ selectedBooking, selectedTreatment, setStep}) {
           Jeg har læst og accepterer bookings og afbudspolitikken
         </label>
       </div>
-      <PrimaryBtn setStep={setStep} text={'Bekræft din booking'} type={'submit'} id={'bookingForm'} />
+      <PrimaryBtn
+        setStep={setStep}
+        text={'Bekræft din booking'}
+        type={'submit'}
+        id={'bookingForm'}
+      />
     </div>
   );
 }
