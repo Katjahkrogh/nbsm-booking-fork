@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --bg: #FDFCF8;
-  --green: #1D3A36;
+  --bg: #fdfcf8;
+  --green: #1d3a36;
 }
 
 html {
@@ -15,4 +15,5 @@ html {
 body {
   background-color: var(--bg);
   color: var(--green);
+  overflow-x: hidden;
 }
