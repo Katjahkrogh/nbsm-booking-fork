@@ -14,7 +14,7 @@ function StepText({ header, smallText }) {
         className={`text-2xl w-full md:w-[500px] md:text-3xl text-green mb-2 mt-5 ${montserrat.className}`}>
         {header}
       </h1>
-      <h2 className="text-sm md:text-base text-lightGreen mb-8">{smallText}</h2>
+      <p className="text-sm md:text-base text-green mb-8">{smallText}</p>
     </div>
   );
 }

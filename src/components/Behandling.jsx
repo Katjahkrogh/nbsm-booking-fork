@@ -7,7 +7,7 @@ function Behandling({ onTreatmentSelect, setStep, selectedTreatment }) {
   return (
     <div className=" flex flex-col md:items-center">
       <StepText header={'Vælg behandling'} smallText={'Design m.m aftales på dagen'} />
-      <div className="space-y-4 text-sm font leading-6 text-lgreen">
+      <fieldset className="space-y-4 text-sm font leading-6 text-lgreen">
         <Radio
           onTreatmentSelect={onTreatmentSelect}
           behandling={'Nyt sæt Forlængelse gele / akrylgele'}
@@ -29,7 +29,7 @@ function Behandling({ onTreatmentSelect, setStep, selectedTreatment }) {
           id={'opfyld2'}
         />
         <Radio onTreatmentSelect={onTreatmentSelect} behandling={'Aftagning'} id={'aftag'} />
-      </div>
+      </fieldset>
       <div className={`${selectedTreatment === null ? 'hidden' : ''}`}>
         <PrimaryBtn setStep={setStep} text={'Vælg dag og tid'} />
       </div>
