@@ -52,13 +52,13 @@ function Wrapper() {
     setSelectedTreatment(selectedTreatment);
   }
 
-  // useEffect(() => {
-  //   console.log(selectedTreatment);
-  // }, [selectedTreatment]);
+  useEffect(() => {
+    console.log(selectedTreatment);
+  }, [selectedTreatment]);
 
-  // useEffect(() => {
-  //   console.log(selectedBooking);
-  // }, [selectedBooking]);
+  useEffect(() => {
+    console.log(selectedBooking);
+  }, [selectedBooking]);
 
   async function submit(evt) {
     evt.preventDefault();
