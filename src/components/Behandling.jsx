@@ -1,44 +1,37 @@
-import React from "react";
-import StepText from "./StepText";
-import PrimaryBtn from "./PrimaryBtn";
-import Radio from "./Radio";
+import React from 'react';
+import StepText from './StepText';
+import PrimaryBtn from './PrimaryBtn';
+import Radio from './Radio';
 
 function Behandling({ onTreatmentSelect, setStep, selectedTreatment }) {
   return (
     <div className=" flex flex-col md:items-center">
-      <StepText
-        header={"Vælg behandling"}
-        smallText={"Design m.m aftales på dagen"}
-      />
-      <ol className="space-y-4 text-sm font leading-6 text-lgreen">
+      <StepText header={'Vælg behandling'} smallText={'Design m.m aftales på dagen'} />
+      <div className="space-y-4 text-sm font leading-6 text-lgreen">
         <Radio
           onTreatmentSelect={onTreatmentSelect}
-          behandling={"Nyt sæt Forlængelse gele / akrylgele"}
-          id={"nytsæt1"}
+          behandling={'Nyt sæt Forlængelse gele / akrylgele'}
+          id={'nytsæt1'}
         />
         <Radio
           onTreatmentSelect={onTreatmentSelect}
-          behandling={"Opfyldning gele / akrylgele"}
-          id={"opfyld1"}
+          behandling={'Opfyldning gele / akrylgele'}
+          id={'opfyld1'}
         />
         <Radio
           onTreatmentSelect={onTreatmentSelect}
-          behandling={"Nyt sæt gelpolish"}
-          id={"nytsæt2"}
+          behandling={'Nyt sæt gelpolish'}
+          id={'nytsæt2'}
         />
         <Radio
           onTreatmentSelect={onTreatmentSelect}
-          behandling={"Opfyldning gelpolish"}
-          id={"opfyld2"}
+          behandling={'Opfyldning gelpolish'}
+          id={'opfyld2'}
         />
-        <Radio
-          onTreatmentSelect={onTreatmentSelect}
-          behandling={"Aftagning"}
-          id={"aftag"}
-        />
-      </ol>
-      <div className={`${selectedTreatment === null ? "hidden" : ""}`}>
-        <PrimaryBtn setStep={setStep} text={"Vælg dag og tid"} />
+        <Radio onTreatmentSelect={onTreatmentSelect} behandling={'Aftagning'} id={'aftag'} />
+      </div>
+      <div className={`${selectedTreatment === null ? 'hidden' : ''}`}>
+        <PrimaryBtn setStep={setStep} text={'Vælg dag og tid'} />
       </div>
     </div>
   );

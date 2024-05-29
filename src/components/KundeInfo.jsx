@@ -4,7 +4,7 @@ import PrimaryBtn from './PrimaryBtn';
 import Input from './Input';
 import StepText from './StepText';
 
-function OpretBruger({ setStep, onNameChange, onEmailChange }) {
+function KundeInfo({ setStep, onNameChange, onEmailChange }) {
   const [navn, setNavn] = useState('');
   const [email, setEmail] = useState('');
   const [fødselsdag, setFødselsdag] = useState('');
@@ -31,7 +31,7 @@ function OpretBruger({ setStep, onNameChange, onEmailChange }) {
       <StepText header={'Indtast dine oplysning'} />
       <Input
         type={'text'}
-        htmlFor={'navn'}
+        htmlFor={'fornavn'}
         name={'navn'}
         placeholder={'Fornavn'}
         minLength={'2'}
@@ -42,7 +42,7 @@ function OpretBruger({ setStep, onNameChange, onEmailChange }) {
       />
       <Input
         type={'email'}
-        htmlFor={'email'}
+        htmlFor={'mail'}
         name={'email'}
         placeholder={'Email'}
         minLength={'2'}
@@ -53,7 +53,7 @@ function OpretBruger({ setStep, onNameChange, onEmailChange }) {
       />
       <Input
         type={'date'}
-        htmlFor={'føs'}
+        htmlFor={'fødselsdag'}
         name={'føs'}
         placeholder={'Fødselsdag'}
         onChange={handleChange}
@@ -61,7 +61,7 @@ function OpretBruger({ setStep, onNameChange, onEmailChange }) {
 
       <Input
         type={'text'}
-        htmlFor={'telefon'}
+        htmlFor={'telefonnummer'}
         name={'telefon'}
         placeholder={'Telefon'}
         minLength={'2'}
@@ -77,4 +77,4 @@ function OpretBruger({ setStep, onNameChange, onEmailChange }) {
   );
 }
 
-export default OpretBruger;
+export default KundeInfo;

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function Radio({ behandling, id, onTreatmentSelect }) {
   return (
@@ -13,8 +13,8 @@ function Radio({ behandling, id, onTreatmentSelect }) {
       />
       <label
         htmlFor={id}
-        className="block cursor-pointer select-none rounded-xl py-4 pl-4 peer-checked:bg-green peer-checked:font-semibold peer-checked:text-white peer-hover:bg-beige peer-checked:hover:bg-green transition-all 	"
-      >
+        aria-label={behandling}
+        className="block cursor-pointer select-none rounded-xl py-4 pl-4 peer-checked:bg-green peer-checked:font-semibold peer-checked:text-white peer-hover:bg-beige peer-checked:hover:bg-green transition-all 	">
         {behandling}
       </label>
     </div>

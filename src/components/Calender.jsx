@@ -156,7 +156,7 @@ export default function Calender({
             )}
           </ol>
         </section>
-      </div>{' '}
+      </div>
       <div className={`${selectedBooking === null ? 'hidden' : ''} flex justify-center`}>
         <PrimaryBtn setStep={setStep} text={'vælg tid'} />
       </div>

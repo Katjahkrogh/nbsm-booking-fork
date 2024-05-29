@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import OpretBruger from './OpretBruger';
+import KundeInfo from './KundeInfo';
 import Calender from './Calender';
 import Behandling from './Behandling';
 import Overview from './Overview';
@@ -149,7 +149,7 @@ function Wrapper() {
           />
         </div>
         <div className={`${step === 2 ? '' : 'hidden'}`}>
-          <OpretBruger setStep={setStep} onNameChange={setUserName} onEmailChange={setuserEmail} />
+          <KundeInfo setStep={setStep} onNameChange={setUserName} onEmailChange={setuserEmail} />
         </div>
         <div className={`${step === 3 ? '' : 'hidden'}`}>
           <Overview

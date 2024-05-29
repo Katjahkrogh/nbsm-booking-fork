@@ -1,11 +1,21 @@
 import React from 'react';
 
-export default function Input({ type, name, htmlFor, placeholder, onChange, minLength, value, className }) {
+export default function Input({
+  type,
+  name,
+  htmlFor,
+  placeholder,
+  onChange,
+  minLength,
+  value,
+  className,
+}) {
   return (
     <label htmlFor={htmlFor} className="text-sm w-full  md:w-[500px] ">
       <input
         type={type}
         name={name}
+        id={htmlFor}
         onChange={onChange}
         placeholder={placeholder}
         required
