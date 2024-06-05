@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Radio({ behandling, id, onTreatmentSelect }) {
+function Radio({ behandling, id, onTreatmentSelect, checked }) {
   return (
     <div className="w-full md:w-[500px] rounded-xl bg-lightBeige">
       <input
@@ -8,8 +8,9 @@ function Radio({ behandling, id, onTreatmentSelect }) {
         name="behandling"
         id={id}
         value={behandling}
-        className="peer hidden"
+        className="sr-only peer"
         onChange={(e) => onTreatmentSelect(e.target.value)}
+        checked={checked}
       />
       <label
         htmlFor={id}

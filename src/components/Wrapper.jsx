@@ -147,6 +147,7 @@ function Wrapper() {
             setSelectedDay={setSelectedDay}
             today={today}
             setStep={setStep}
+            setSelectedBooking={setSelectedBooking}
           />
         </div>
         <div className={`${step === 2 ? '' : 'hidden'}`}>

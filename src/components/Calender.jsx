@@ -180,7 +180,7 @@ function Times({ time, handleTimeClick }) {
           name="times"
           id={time.id}
           value={formattedDateTime}
-          className="peer hidden"
+          className="sr-only peer"
           onClick={() => handleTimeClick(time.day, time.time)}
         />
         <label

@@ -8,13 +8,20 @@ const montserrat = Montserrat({
 });
 
 function BackBtn({ setStep }) {
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      setStep((prevStep) => prevStep - 1);
+    }
+  };
   return (
     <div
       role="button"
       aria-label="Gå tilbage"
+      tabIndex={0}
       onClick={() => {
         setStep((prevStep) => prevStep - 1);
       }}
+      onKeyDown={handleKeyDown}
       className={`text-green cursor-pointer flex gap-1 justify-start align-baseline ${montserrat.className}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
