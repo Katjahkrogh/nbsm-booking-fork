@@ -160,13 +160,6 @@ function Wrapper() {
             selectedTreatment={selectedTreatment}
           />
         </div>
-        {selectedBooking && (
-          <>
-            <input type="hidden" name="booking_behandling" value={selectedTreatment} />
-            <input type="hidden" name="booking_date" value={selectedBooking.day} />
-            <input type="hidden" name="booking_time" value={selectedBooking.time} />
-          </>
-        )}
         <div className={`${step === 4 ? '' : 'hidden'}`}>
           <FinalOverview
             selectedBooking={selectedBooking}
@@ -175,6 +168,13 @@ function Wrapper() {
             userEmail={userEmail}
           />
         </div>
+        {selectedBooking && (
+          <>
+            <input type="hidden" name="booking_behandling" value={selectedTreatment} />
+            <input type="hidden" name="booking_date" value={selectedBooking.day} />
+            <input type="hidden" name="booking_time" value={selectedBooking.time} />
+          </>
+        )}
       </form>
     </div>
   );
